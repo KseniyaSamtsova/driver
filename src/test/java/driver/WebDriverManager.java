@@ -9,12 +9,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.sun.corba.se.impl.activation.ServerMain.logError;
+
 public class WebDriverManager {
 
     private static final String WEBDRIVER_CHROME = "webdriver.chrome.driver";
     private static final String WEBDRIVER_FIREFOX = "webdriver.gecko.driver";
 
-    private static WebDriver driver;
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public enum BrowserType {
         FIREFOX,
@@ -22,13 +24,14 @@ public class WebDriverManager {
     }
 
     public static WebDriver getInstance() {
-        if (driver == null) {
-            driver = createDriver();
+        if (driver.get() == null) {
+            driver.set(createDriver());
         }
-        return driver;
+        return driver.get();
     }
 
     private static WebDriver createDriver() {
+        WebDriver driver = null;
         switch (ConfigWebDriver.getBrowserType()) {
             case CHROME:
                 System.setProperty(WEBDRIVER_CHROME, ConfigWebDriver.getDriverPath());
@@ -42,32 +45,34 @@ public class WebDriverManager {
                 driver = new FirefoxDriver();
                 break;
         }
-        maximize();
-        setImplicitlyWait();
-        setPageLoadTimeout();
+        maximize(driver);
+        setImplicitlyWait(driver);
+        setPageLoadTimeout(driver);
         return driver;
     }
 
     public static void closeDriver() {
         try {
-            driver.quit();
-            driver = null;
+            if (driver.get() != null) {
+                driver.get().quit();
+                driver.remove();
+            }
         } catch (Exception e) {
-            System.out.println("Can not quit browser");
+            logError("Can not quit browser");
         }
     }
 
-    private static void maximize() {
+    private static void maximize(WebDriver driver) {
         if (ConfigWebDriver.isWindowMaximaze()) {
             driver.manage().window().maximize();
         }
     }
 
-    private static void setImplicitlyWait() {
+    private static void setImplicitlyWait(WebDriver driver) {
         driver.manage().timeouts().implicitlyWait(ConfigWebDriver.getImplicitlyWait(), TimeUnit.SECONDS);
     }
 
-    private static void setPageLoadTimeout() {
+    private static void setPageLoadTimeout(WebDriver driver) {
         driver.manage().timeouts().pageLoadTimeout(ConfigWebDriver.getPageLoadTimeout(), TimeUnit.SECONDS);
     }
 }
