@@ -3,7 +3,8 @@
 <suite name="first-suit">
   <test name="test">
     <classes>
-      <class name="tests.BaseTest"/>
+      <class name="tests.LogInTest"/>
+      <class name="tests.SendingEmailTest"/>
     </classes>
   </test>
 </suite>

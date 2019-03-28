@@ -1,8 +1,11 @@
 package driver;
 
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +33,8 @@ public class WebDriverManager {
             case CHROME:
                 System.setProperty(WEBDRIVER_CHROME, ConfigWebDriver.getDriverPath());
                 driver = new ChromeDriver();
+                DesiredCapabilities dc = new DesiredCapabilities();
+                dc.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
                 break;
             case FIREFOX:
                 System.setProperty(WEBDRIVER_FIREFOX, ConfigWebDriver.getDriverPath());
@@ -46,6 +51,7 @@ public class WebDriverManager {
     public static void closeDriver() {
         try {
             driver.quit();
+            driver = null;
         } catch (Exception e) {
             System.out.println("Can not quit browser");
         }

@@ -21,15 +21,40 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//input[@class='o-control']")
     private WebElement submitButton;
 
+    @FindBy(id = "mailbox:error")
+    private WebElement errorMessage;
+
     public MainPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public MainPage open() {
+    public void open() {
         driver.get(BASE_URL);
-        return this;
     }
 
+    public void enterUsername(String username) {
+        highlightElement(loginInput);
+        loginInput.sendKeys(username);
+    }
 
+    public void enterPassword(String password) {
+        passwordInput.sendKeys(password);
+    }
+
+    public void clickSubmit() {
+        submitButton.click();
+    }
+
+    public void selectDoNotRemember() {
+        doNotRememberCheckbox.click();
+    }
+
+    public String getErrorMessage() {
+        return errorMessage.getText();
+    }
+
+    public boolean checkLogOut() {
+        return loginInput.isDisplayed();
+    }
 }

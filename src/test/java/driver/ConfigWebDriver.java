@@ -1,6 +1,7 @@
 package driver;
 
 import driver.WebDriverManager.BrowserType;
+import entity.User;
 
 import java.util.ResourceBundle;
 
@@ -26,5 +27,9 @@ public class ConfigWebDriver {
 
     public static Long getPageLoadTimeout() {
         return Long.parseLong(bundle.getString("pageLoadTimeout"));
+    }
+
+    public static User getDefaultUser() {
+        return new User(bundle.getString("user"), bundle.getString("password"));
     }
 }
