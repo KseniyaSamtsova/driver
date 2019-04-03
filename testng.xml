@@ -6,7 +6,7 @@
       <!--<class name="tests.LogInTest"/>-->
       <!--<class name="tests.SendingEmailTest"/>-->
       <!--<class name="tests.BrowserMobProxyTest"/>-->
-      <class name="mobile_tests.BaseTest1"/>
+      <class name="mobile_tests.BaseTestMobile"/>
     </classes>
   </test>
 </suite>

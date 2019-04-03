@@ -54,10 +54,7 @@ public class WebDriverManager {
                 break;
             case ANDROID:
                 driver = new AndroidDriver<AndroidElement>(ConfigMobileDriver.getAppiumUrl(), ConfigMobileDriver.getCapabilities());
-                ConfigMobileDriver.setAndroidWaiters(driver);
                 break;
-
-
         }
 //        maximize(driver);
 //        setImplicitlyWait(driver);
@@ -66,7 +63,6 @@ public class WebDriverManager {
 //        setImplicitlyWait();
 //        setPageLoadTimeout();
         return driver;
-
     }
 
 //    public static void closeDriver() {
@@ -115,7 +111,5 @@ public class WebDriverManager {
     private static void setPageLoadTimeout() {
         driver.manage().timeouts().pageLoadTimeout(ConfigWebDriver.getPageLoadTimeout(), TimeUnit.SECONDS);
     }
-
-
 
 }
