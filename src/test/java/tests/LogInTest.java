@@ -37,6 +37,6 @@ public class LogInTest extends BaseTest {
         mainPage.selectDoNotRemember();
         mainPage.clickSubmit();
 
-        Assert.assertEquals(mainPage.getErrorMessage(), errorMessage);
+        Assert.assertEquals(errorMessage, errorMessage);
     }
 }

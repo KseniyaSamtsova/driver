@@ -40,7 +40,7 @@ public class WebDriverManager {
 
     private static WebDriver createDriver() {
         WebDriver driver = null;
-        switch (ConfigMobileDriver.getBrowserType()) {
+        switch (ConfigWebDriver.getBrowserType()) {
             case CHROME:
                 System.setProperty(WEBDRIVER_CHROME, ConfigWebDriver.getDriverPath());
                 driver = new ChromeDriver();

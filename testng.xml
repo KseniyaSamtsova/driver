@@ -3,10 +3,10 @@
 <suite name="first-suit" parallel="classes" thread-count="1">
   <test name="test">
     <classes>
-      <!--<class name="tests.LogInTest"/>-->
-      <!--<class name="tests.SendingEmailTest"/>-->
+      <class name="tests.LogInTest"/>
+      <class name="tests.SendingEmailTest"/>
       <!--<class name="tests.BrowserMobProxyTest"/>-->
-      <class name="mobile_tests.BaseTestMobile"/>
+      <!--<class name="mobile_tests.BaseTestMobile"/>-->
     </classes>
   </test>
 </suite>

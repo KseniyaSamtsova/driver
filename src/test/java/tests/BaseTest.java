@@ -5,7 +5,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
 public class BaseTest {
@@ -16,13 +18,13 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeClass(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void init() {
         driver = WebDriverManager.getInstance();
         System.err.println(driver);
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         WebDriverManager.closeDriver();
         logger.info("Driver closed");
