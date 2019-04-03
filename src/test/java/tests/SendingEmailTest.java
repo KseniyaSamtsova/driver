@@ -34,9 +34,10 @@ public class SendingEmailTest extends BaseTest {
         createMessagePage.saveEmailAsDraft();
 
         EmailFoldersList emailFoldersList = new EmailFoldersList(driver);
+        logger.info("Open Drafts");
         emailFoldersList.goToDrafts();
-        DraftsPage draftPage = new DraftsPage(driver);
-
-        Assert.assertTrue(draftPage.dragAndDropToArchive(email));
+//        DraftsPage draftPage = new DraftsPage(driver);
+//
+//        Assert.assertTrue(draftPage.dragAndDropToArchive(email));
     }
 }
